@@ -15,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import java.util.concurrent.TimeUnit;
+
 import static xyz.solidspoon.sc.security.ApplicationUserPermeation.COURSE_WRITE;
 import static xyz.solidspoon.sc.security.ApplicationUserRole.*;
 
@@ -46,7 +48,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/courses", true)
                 .and()
-                .rememberMe(); // change expiration time from 20 minutes up to 2 weeks by default
+                .rememberMe()
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) // change expiration time from 20 minutes up to 2 weeks by default
+                .key("somethingverysecurd");
     }
 
     @Override
