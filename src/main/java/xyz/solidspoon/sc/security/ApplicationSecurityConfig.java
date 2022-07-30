@@ -44,7 +44,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/courses", true);
+                .defaultSuccessUrl("/courses", true)
+                .and()
+                .rememberMe(); // change expiration time from 20 minutes up to 2 weeks by default
     }
 
     @Override
