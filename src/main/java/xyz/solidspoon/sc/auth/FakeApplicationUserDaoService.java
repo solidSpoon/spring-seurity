@@ -18,9 +18,10 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
 
     @Override
     public Optional<ApplicationUser> selectApplicationUserByUserName(String userName) {
-        return getApplicationUsers().stream()
+        Optional<ApplicationUser> first = getApplicationUsers().stream()
                 .filter(applicationUser -> userName.equals(applicationUser.getUsername()))
                 .findFirst();
+        return first;
     }
 
     private List<ApplicationUser> getApplicationUsers() {
@@ -32,6 +33,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                         .isAccountNonExpired(true)
                         .isAccountNonLocked(true)
                         .isCredentialsNonExpired(true)
+                        .isEnabled(true)
                         .build(),
                 ApplicationUser.builder()
                         .username("linda")
@@ -40,6 +42,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                         .isAccountNonExpired(true)
                         .isAccountNonLocked(true)
                         .isCredentialsNonExpired(true)
+                        .isEnabled(true)
                         .build(),
                 ApplicationUser.builder()
                         .username("tom")
@@ -48,6 +51,7 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao {
                         .isAccountNonExpired(true)
                         .isAccountNonLocked(true)
                         .isCredentialsNonExpired(true)
+                        .isEnabled(true)
                         .build()
         );
         return applicationUsers;
